@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #08090b;
-  --foreground: #e4e4e7;
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
 @theme inline {
@@ -19,14 +19,14 @@ body {
 }
 
 ::selection {
-  background: #c2410c;
-  color: #fff7ed;
+  background: #ffffff;
+  color: #000000;
 }
 
 .grain {
   background-image: radial-gradient(
     circle at 1px 1px,
-    rgba(255, 255, 255, 0.05) 1px,
+    rgba(255, 255, 255, 0.06) 1px,
     transparent 0
   );
   background-size: 22px 22px;

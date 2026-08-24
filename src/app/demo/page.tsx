@@ -28,10 +28,10 @@ export default function DemoPage() {
     <div className="flex flex-1 flex-col">
       <PrototypeBanner />
 
-      <header className="border-b border-zinc-800/80 bg-[#08090b]">
+      <header className="border-b border-zinc-800 bg-black">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <Link href="/" className="flex items-center gap-2">
-            <span className="inline-block h-2 w-2 rounded-full bg-orange-500" />
+            <span className="inline-block h-2 w-2 rounded-full bg-white" />
             <span className="font-mono text-sm font-semibold tracking-tight text-zinc-100">
               code afterlife
             </span>
@@ -48,7 +48,7 @@ export default function DemoPage() {
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-10">
         {/* repo input row */}
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <div className="flex flex-1 items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/60 px-4 py-3 font-mono text-sm">
+          <div className="flex flex-1 items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950 px-4 py-3 font-mono text-sm">
             <span className="text-zinc-600">$ afterlife scan</span>
             <input
               value={repo}
@@ -59,7 +59,7 @@ export default function DemoPage() {
           </div>
           <button
             onClick={runScan}
-            className="rounded-lg bg-orange-500 px-5 py-3 text-sm font-semibold text-zinc-950 transition-colors hover:bg-orange-400 disabled:opacity-60"
+            className="rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black transition-colors hover:bg-zinc-300 disabled:opacity-50"
             disabled={scanState === "scanning"}
           >
             {scanState === "scanning" ? "Indexing…" : "Run scan"}
@@ -86,7 +86,7 @@ export default function DemoPage() {
               <span className="mr-2 text-zinc-600">{t.hint}</span>
               {t.label}
               {tab === t.id && (
-                <span className="absolute inset-x-0 -bottom-px h-px bg-orange-500" />
+                <span className="absolute inset-x-0 -bottom-px h-px bg-white" />
               )}
             </button>
           ))}
@@ -132,22 +132,28 @@ function StatBlock({
   label,
   value,
   sub,
-  color,
+  emphasis = "solid",
 }: {
   label: string;
   value: string;
   sub: string;
-  color: string;
+  emphasis?: "solid" | "dim" | "muted";
 }) {
+  const valueClass =
+    emphasis === "solid"
+      ? "text-zinc-50"
+      : emphasis === "dim"
+        ? "text-zinc-500 line-through decoration-1 decoration-zinc-700"
+        : "text-zinc-400 italic";
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5">
+    <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
       <div className="font-mono text-xs uppercase tracking-wide text-zinc-500">
         {label}
       </div>
-      <div className={`mt-2 font-mono text-3xl font-semibold ${color}`}>
+      <div className={`mt-2 font-mono text-3xl font-semibold ${valueClass}`}>
         {value}
       </div>
-      <div className="mt-1 text-xs text-zinc-500">{sub}</div>
+      <div className="mt-1 text-xs text-zinc-600">{sub}</div>
     </div>
   );
 }
@@ -171,19 +177,19 @@ function CensusView({ repo }: { repo: string }) {
             label="Alive"
             value="73.9%"
             sub="2,104 files"
-            color="text-emerald-400"
+            emphasis="solid"
           />
           <StatBlock
             label="Unreachable"
             value="21.4%"
             sub="621 files"
-            color="text-rose-400"
+            emphasis="dim"
           />
           <StatBlock
             label="Unknown"
             value="4.7%"
             sub="122 files"
-            color="text-amber-300"
+            emphasis="muted"
           />
         </div>
       </div>
@@ -197,24 +203,24 @@ function CensusView({ repo }: { repo: string }) {
             label="Alive"
             value="41"
             sub="packages"
-            color="text-emerald-400"
+            emphasis="solid"
           />
           <StatBlock
             label="Vestigial"
             value="4"
             sub="packages"
-            color="text-orange-400"
+            emphasis="dim"
           />
           <StatBlock
             label="Unknown"
             value="2"
             sub="packages"
-            color="text-amber-300"
+            emphasis="muted"
           />
         </div>
       </div>
 
-      <div className="rounded-xl border border-orange-500/30 bg-orange-500/[0.06] p-5 font-mono text-sm text-orange-200">
+      <div className="rounded-xl border border-zinc-700 bg-zinc-950 p-5 font-mono text-sm text-zinc-200">
         625 candidates for burial · 11 pending upgrades to triage
       </div>
     </div>
@@ -280,7 +286,7 @@ function CertificateView() {
           <Check ok={false} label="file is not covered by any test (§06)" />
         </ul>
 
-        <div className="mt-5 rounded border border-emerald-500/40 bg-emerald-500/10 py-2 text-center text-sm font-semibold text-emerald-300">
+        <div className="mt-5 rounded border border-white bg-white py-2 text-center text-sm font-semibold text-black">
           ✓ CERTIFIED DEAD
         </div>
       </div>
@@ -299,7 +305,7 @@ function Row({ k, v }: { k: string; v: string }) {
 
 function Check({ ok, label }: { ok: boolean; label: string }) {
   return (
-    <li className={ok ? "text-zinc-300" : "text-rose-400"}>
+    <li className={ok ? "text-zinc-300" : "text-zinc-500"}>
       {ok ? "✓" : "✗"} {label}
     </li>
   );
@@ -313,7 +319,7 @@ function DecayChart() {
         <div
           key={i}
           className={`flex-1 rounded-t ${
-            h === 0 ? "bg-zinc-800" : "bg-orange-500/70"
+            h === 0 ? "bg-zinc-800" : "bg-zinc-300"
           }`}
           style={{ height: `${(h / 8) * 100}%`, minHeight: h === 0 ? 2 : 4 }}
         />
@@ -353,11 +359,11 @@ function TriageView() {
         {clear.map((c) => (
           <div
             key={c.pkg}
-            className="rounded-xl border border-emerald-500/25 bg-emerald-500/[0.04] p-5"
+            className="rounded-xl border border-zinc-800 bg-zinc-950 p-5"
           >
             <div className="flex flex-wrap items-center gap-3 font-mono text-sm">
-              <span className="rounded bg-emerald-500/20 px-2 py-0.5 text-xs font-semibold text-emerald-300">
-                CLEAR
+              <span className="rounded border border-zinc-600 px-2 py-0.5 text-xs font-semibold text-zinc-200">
+                ✓ CLEAR
               </span>
               <span className="text-zinc-100">{c.pkg}</span>
               <span className="text-zinc-500">
@@ -366,16 +372,16 @@ function TriageView() {
             </div>
             <p className="mt-2 text-xs leading-5 text-zinc-500">{c.note}</p>
             {c.verified && (
-              <p className="mt-1 font-mono text-xs text-emerald-400/80">
+              <p className="mt-1 font-mono text-xs text-zinc-500">
                 {c.verified}
               </p>
             )}
           </div>
         ))}
 
-        <div className="rounded-xl border border-orange-500/30 bg-orange-500/[0.05] p-5">
+        <div className="rounded-xl border-2 border-zinc-600 bg-zinc-950 p-5">
           <div className="flex flex-wrap items-center gap-3 font-mono text-sm">
-            <span className="rounded bg-orange-500/20 px-2 py-0.5 text-xs font-semibold text-orange-300">
+            <span className="rounded bg-white px-2 py-0.5 text-xs font-semibold text-black">
               ▲ REVIEW
             </span>
             <span className="text-zinc-100">httpx</span>
@@ -383,9 +389,9 @@ function TriageView() {
           </div>
           <p className="mt-2 text-xs text-zinc-400">
             <span className="text-zinc-200">Client.send()</span> dropped
-            positional <code className="text-orange-300">timeout</code>
+            positional <code className="text-zinc-200">timeout</code>
           </p>
-          <div className="mt-3 space-y-1 rounded-lg bg-zinc-950/60 p-3 font-mono text-xs text-zinc-400">
+          <div className="mt-3 space-y-1 rounded-lg border border-zinc-800 bg-black p-3 font-mono text-xs text-zinc-400">
             <p>you call it positionally at:</p>
             <p className="pl-3 text-zinc-300">
               src/checkout.py:47{"  "}
@@ -398,12 +404,12 @@ function TriageView() {
           </div>
           <p className="mt-2 text-xs text-zinc-500">
             suggested · pass as keyword:{" "}
-            <code className="text-orange-300">timeout=30</code>
+            <code className="text-zinc-200">timeout=30</code>
           </p>
         </div>
       </div>
 
-      <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 text-center font-mono text-xs text-zinc-400">
+      <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-center font-mono text-xs text-zinc-400">
         9 cleared · 2 need review · 0 unknown
       </div>
       <p className="text-xs text-zinc-600">

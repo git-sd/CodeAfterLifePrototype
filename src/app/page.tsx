@@ -4,7 +4,7 @@ import { PrototypeBanner } from "@/components/PrototypeBanner";
 function SectionLabel({ n, title }: { n: string; title: string }) {
   return (
     <div className="mb-6 flex items-baseline gap-3">
-      <span className="font-mono text-xs text-orange-400/70">{n}</span>
+      <span className="font-mono text-xs text-zinc-500">{n}</span>
       <h2 className="text-2xl font-semibold tracking-tight text-zinc-50 sm:text-3xl">
         {title}
       </h2>
@@ -21,7 +21,7 @@ export default function Home() {
       <header className="sticky top-0 z-10 border-b border-zinc-800/80 bg-[#08090b]/85 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-2">
-            <span className="inline-block h-2 w-2 rounded-full bg-orange-500" />
+            <span className="inline-block h-2 w-2 rounded-full bg-white" />
             <span className="font-mono text-sm font-semibold tracking-tight text-zinc-100">
               code afterlife
             </span>
@@ -69,7 +69,7 @@ export default function Home() {
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link
               href="/demo"
-              className="rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-zinc-950 transition-colors hover:bg-orange-400"
+              className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition-colors hover:bg-zinc-300"
             >
               Walk through the prototype
             </Link>
@@ -86,7 +86,7 @@ export default function Home() {
           <SectionLabel n="02" title="Two symptoms, one cause" />
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-6">
-              <h3 className="mb-2 font-mono text-sm text-orange-400">
+              <h3 className="mb-2 font-mono text-sm text-zinc-100">
                 Code you can&apos;t account for
               </h3>
               <p className="text-sm leading-6 text-zinc-400">
@@ -97,7 +97,7 @@ export default function Home() {
               </p>
             </div>
             <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-6">
-              <h3 className="mb-2 font-mono text-sm text-orange-400">
+              <h3 className="mb-2 font-mono text-sm text-zinc-100">
                 Dependency updates nobody reads
               </h3>
               <p className="text-sm leading-6 text-zinc-400">
@@ -186,22 +186,22 @@ export default function Home() {
             {[
               {
                 name: "ALIVE",
-                color: "text-emerald-400",
+                color: "text-zinc-50",
                 desc: "A path exists from a detected entry point to this node.",
               },
               {
                 name: "UNREACHABLE",
-                color: "text-rose-400",
+                color: "text-zinc-500 line-through decoration-zinc-600",
                 desc: "No path from any entry point. Zero references.",
               },
               {
                 name: "VESTIGIAL",
-                color: "text-orange-400",
+                color: "text-zinc-300",
                 desc: "Installed, declared, never imported anywhere.",
               },
               {
                 name: "UNKNOWN",
-                color: "text-amber-300",
+                color: "text-zinc-400 italic",
                 desc: "Reachability can't be determined statically.",
               },
             ].map((s) => (
@@ -259,7 +259,7 @@ export default function Home() {
       {/* closing pitch */}
       <section className="border-b border-zinc-800/80 bg-zinc-950/40">
         <div className="mx-auto max-w-5xl px-6 py-20">
-          <blockquote className="border-l-2 border-orange-500 pl-6 text-xl font-medium leading-8 text-zinc-100 sm:text-2xl">
+          <blockquote className="border-l-2 border-white pl-6 text-xl font-medium leading-8 text-zinc-100 sm:text-2xl">
             Every other tool guesses which code is dead. We issue a death
             certificate — we run your tests to sign it, and we print the
             checks it failed.
@@ -267,7 +267,7 @@ export default function Home() {
           <div className="mt-10">
             <Link
               href="/demo"
-              className="rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-zinc-950 transition-colors hover:bg-orange-400"
+              className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition-colors hover:bg-zinc-300"
             >
               Walk through the prototype →
             </Link>
